@@ -8,9 +8,15 @@ import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import { useHistory } from "react-router-dom";
 
+
+
+
+
 export function MyProperties() {
     const [token] = useState<string>(store.get('token'))
     const [properties, setProperties] = useState<IProp[]>(store.get('my_properties'))
+
+    const [isRefreshDisabled, setRefresh] = useState<number>(0)
     let history = useHistory();
 
     useEffect(() => {
@@ -22,6 +28,19 @@ export function MyProperties() {
             history.push('/connect?badToken')
         }
     },[token, properties])
+
+    const refreshProps = () => {
+      // store.remove('my_properties')
+      setProperties([])
+      let x = 25;
+      setRefresh(x)
+      const timer = setInterval((e) => {
+        x = x - 1
+        setRefresh(x)
+        if (x === 0)
+          clearInterval(timer) 
+      }, 1000)
+    }
 
 
   const renderTable = useMemo(() => {
@@ -38,10 +57,8 @@ export function MyProperties() {
       }
     }) : [];
 
-    const refreshProps = () => {
-      // store.remove('my_properties')
-      setProperties([])
-    }
+
+
     return (
       <div>
 
@@ -58,14 +75,14 @@ export function MyProperties() {
      />
       </DataTableExtensions>
       <div style={{textAlign: 'center'}}>
-      <button onClick={() => refreshProps()}>refresh properties</button>
+      <button disabled={isRefreshDisabled !== 0} onClick={() => refreshProps()}>refresh properties {isRefreshDisabled === 0 ? '' : isRefreshDisabled.toString()}</button>
       </div>
 
       </div>
 
 
     )
-  },[properties])
+  },[properties, isRefreshDisabled])
 
 
     return (
