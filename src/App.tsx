@@ -121,6 +121,8 @@ function App() {
           
         </Switch>
 
+        <p style={{textAlign: 'center'}}>What a fancy front page! <Link to="/my-properties">Go to My Properties for some action</Link></p>
+        
         <BottomText>
         <p style={{textAlign: "center"}}> This site saves NO data from our users. The site will exclusively communicate with upland.me own servers</p>
         <p style={{textAlign: "center"}}>Any saved information, is only saved on the browser.</p>
