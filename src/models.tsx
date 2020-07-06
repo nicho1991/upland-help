@@ -2,6 +2,11 @@ import React from 'react'
 
 export const columns = [
     {
+      name: 'Adress',
+      selector: 'adress',
+      sortable: true,
+    },
+    {
       name: 'Street',
       selector: 'street',
       sortable: true,

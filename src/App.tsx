@@ -43,14 +43,6 @@ width: 100%
 
 function App() {
 
-  //const [token, setToken] = useState<any>()
-  //const [auth, setAuth] = useState<any>(null)
-  //const [myProperties, setMyProperties] = useState<IProp[]>();
-  //const [error, setError] = useState<any>(null);
-  //const [loadingProps , setLoadingProps] = useState(true)
-  
-  // login logout
-
 
 
   useEffect(() => {
@@ -59,14 +51,10 @@ function App() {
    });
     const token = localStorage.getItem('token');
 
-    if (token) {
-      //setAuth(true)
-      //setToken(token)
-    } else {
-      //setAuth(false)
-      //setToken('')
-    }
     },[])
+
+
+
 
   useEffect(() => {
     const props = localStorage.getItem('props')

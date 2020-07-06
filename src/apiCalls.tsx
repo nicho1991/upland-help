@@ -41,6 +41,12 @@ const getPropertyPrice = (token: string, prop_id: number) => {
       headers: {'Authorization': "Bearer "+token}
     })
   }
+
+  const getcollectionTypes = () => {
+    return fetch('https://api.upland.me/collections', {
+      method: 'get',
+    })
+  }
   const collectionList = (token: string) => {
     return fetch('https://api.upland.me/collections', {
       method: 'get',
@@ -48,4 +54,4 @@ const getPropertyPrice = (token: string, prop_id: number) => {
     })
   }
 
-  export {getDashBoard, login, getMyProperties, getMyPropertiesDetailed, getPropertyPrice}
+  export {getDashBoard, login, getMyProperties, getMyPropertiesDetailed, getPropertyPrice, getcollectionTypes}

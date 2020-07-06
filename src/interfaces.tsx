@@ -42,3 +42,13 @@ export interface IDashboard {
     price: number,
     sale_price: number
   }
+
+  export interface ICollection {
+    amount: number,
+    category: number,
+    description: string,
+    name: string,
+    requirements: string,
+    id: number,
+    yield_bosst: number
+  }

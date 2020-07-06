@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { IProp } from './interfaces';
+import { IProp, ICollection } from './interfaces';
 
 import { getMyPropertiesFunction } from './functions'
 import * as store from 'store'
@@ -9,19 +9,21 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import { useHistory } from "react-router-dom";
 
 
-
-
-
 export function MyProperties() {
     const [token] = useState<string>(store.get('token'))
     const [properties, setProperties] = useState<IProp[]>(store.get('my_properties'))
+    const [collections, setCollections] = useState<ICollection[]>(store.get('collections'))
 
     const [isRefreshDisabled, setRefresh] = useState<number>(0)
     let history = useHistory();
 
+
     useEffect(() => {
         if(token && ((!properties) || properties.length === 0)) {
-            getMyPropertiesFunction(token).then(res => setProperties(res)).catch(e => {
+            getMyPropertiesFunction(token).then((res) => {
+  
+              setProperties(res)
+            }).catch(e => {
               history.push('/connect/badToken')})
             
         } else if (!token) {
@@ -47,9 +49,10 @@ export function MyProperties() {
     const data = properties !== undefined ? properties.map(d => {
       return {
         id: d.prop_id , 
-        street: d.full_address, 
+        adress: d.full_address, 
         initial_price: d.initial_price,
         boost: d.collection_boost,
+        street: d.street.name,
         yield: d.yield_per_hour,
         purchace_price: d.price,
         status: d.status,
